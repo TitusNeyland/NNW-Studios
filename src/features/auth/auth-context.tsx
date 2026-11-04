@@ -92,12 +92,25 @@ function subscribeAuth(cb: () => void) {
   };
 }
 
-function getAuthSnapshot() {
-  return { user: currentUser, loading: authLoading };
+// Cached snapshot objects — React requires referential stability
+type AuthSnapshot = { user: AuthUser | null; loading: boolean };
+
+let cachedSnapshot: AuthSnapshot = { user: currentUser, loading: authLoading };
+
+function getAuthSnapshot(): AuthSnapshot {
+  if (
+    cachedSnapshot.user !== currentUser ||
+    cachedSnapshot.loading !== authLoading
+  ) {
+    cachedSnapshot = { user: currentUser, loading: authLoading };
+  }
+  return cachedSnapshot;
 }
 
-function getServerSnapshot() {
-  return { user: null, loading: false };
+const SERVER_SNAPSHOT: AuthSnapshot = { user: null, loading: false };
+
+function getServerSnapshot(): AuthSnapshot {
+  return SERVER_SNAPSHOT;
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
