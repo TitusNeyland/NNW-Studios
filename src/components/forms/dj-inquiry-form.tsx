@@ -37,7 +37,7 @@ export function DjInquiryForm() {
   });
 
   const onSubmit = async (_data: FormData) => {
-    // Phase 4: Store in Firestore via server action
+    void _data; // Will be sent to Firestore
     await new Promise((r) => setTimeout(r, 1000));
     setSubmitted(true);
   };

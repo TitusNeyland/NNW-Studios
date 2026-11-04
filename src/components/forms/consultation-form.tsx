@@ -35,6 +35,7 @@ export function ConsultationForm() {
   });
 
   const onSubmit = async (_data: FormData) => {
+    void _data; // Will be sent to Firestore
     await new Promise((r) => setTimeout(r, 1000));
     setSubmitted(true);
   };

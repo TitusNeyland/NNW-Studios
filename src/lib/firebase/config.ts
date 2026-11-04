@@ -1,18 +1,9 @@
-/**
- * Firebase Client Configuration
- *
- * This file initializes Firebase for client-side usage.
- * All values come from environment variables — never commit actual keys.
- *
- * Phase 4 will wire this into the auth and Firestore layers.
- */
+import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
+import { getAuth, type Auth } from "firebase/auth";
+import { getFirestore, type Firestore } from "firebase/firestore";
+import { getStorage, type FirebaseStorage } from "firebase/storage";
 
-// import { initializeApp, getApps } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getFirestore } from "firebase/firestore";
-// import { getStorage } from "firebase/storage";
-
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -21,10 +12,26 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Uncomment when Firebase is configured (Phase 4):
-// const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-// export const auth = getAuth(app);
-// export const db = getFirestore(app);
-// export const storage = getStorage(app);
+/**
+ * Firebase is only initialized when a valid API key is present.
+ * During build / prerender (no env vars), everything stays null
+ * and the AuthProvider falls back to a no-op state.
+ */
+const isConfigured = Boolean(firebaseConfig.apiKey);
 
-export { firebaseConfig };
+let app: FirebaseApp | null = null;
+let _auth: Auth | null = null;
+let _db: Firestore | null = null;
+let _storage: FirebaseStorage | null = null;
+
+if (isConfigured) {
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+  _auth = getAuth(app);
+  _db = getFirestore(app);
+  _storage = getStorage(app);
+}
+
+export const auth = _auth;
+export const db = _db;
+export const storage = _storage;
+export { isConfigured };

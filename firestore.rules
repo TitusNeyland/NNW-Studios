@@ -1,0 +1,144 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper Functions ──
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function hasRole(role) {
+      return isAuthenticated() && request.auth.token.role == role;
+    }
+
+    function isAdmin() {
+      return hasRole('admin') || hasRole('superadmin');
+    }
+
+    function isStaff() {
+      return isAdmin() || hasRole('staff') || hasRole('engineer');
+    }
+
+    // ── Users ──
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ── Bookings ──
+    match /bookings/{bookingId} {
+      allow read: if isOwner(resource.data.customerUid) || isStaff();
+      allow create: if isAuthenticated();
+      // Updates (status changes) go through server-side only
+      allow update: if isAdmin();
+      allow delete: if false; // soft-delete only
+    }
+
+    // ── Booking Holds ──
+    match /bookingHolds/{holdId} {
+      allow read: if isOwner(resource.data.customerUid) || isStaff();
+      allow create: if isAuthenticated();
+      allow delete: if isOwner(resource.data.customerUid) || isAdmin();
+    }
+
+    // ── Services (public read, admin write) ──
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Studio Rooms ──
+    match /studioRooms/{roomId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Engineers ──
+    match /engineers/{engineerId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Engineer Availability ──
+    match /engineerAvailability/{docId} {
+      allow read: if true;
+      allow write: if isAdmin() || isOwner(resource.data.engineerId);
+    }
+
+    // ── Events (public read, admin write) ──
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Event RSVPs ──
+    match /eventRSVPs/{rsvpId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create: if isAuthenticated();
+      allow delete: if isOwner(resource.data.userId) || isAdmin();
+    }
+
+    // ── Content (published = public, draft = admin only) ──
+    match /content/{contentId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ── DJ Inquiries ──
+    match /djInquiries/{inquiryId} {
+      allow read: if isAdmin();
+      allow create: if true; // public form submission
+      allow update: if isAdmin();
+    }
+
+    // ── Consultation Inquiries ──
+    match /consultationInquiries/{inquiryId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update: if isAdmin();
+    }
+
+    // ── Contact Submissions ──
+    match /contactSubmissions/{subId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update: if isAdmin();
+    }
+
+    // ── Memberships ──
+    match /memberships/{membershipId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ── Membership Plans (public read) ──
+    match /membershipPlans/{planId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Site Settings ──
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Audit Logs (admin read only, server write only) ──
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false; // server-side only
+    }
+
+    // ── Deny everything else ──
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
