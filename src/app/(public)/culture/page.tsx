@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Newspaper, Film, Camera, Pen } from "lucide-react";
+import {
+  ArrowRight,
+  Newspaper,
+  Film,
+  Camera,
+  Pen,
+  BookOpen,
+  ExternalLink,
+} from "lucide-react";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -88,6 +97,59 @@ export default function CulturePage() {
         <p className="mt-3 text-[10px] text-text-muted/50 tracking-wide">
           Placeholder content — all stories managed through the NNW CMS.
         </p>
+      </Section>
+
+      {/* ── Book Feature ── */}
+      <Section className="py-16 md:py-24 bg-bg-secondary">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Book cover */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-[260px] md:w-[300px] aspect-[3/4] rounded-sm overflow-hidden shadow-2xl shadow-black/50 ring-1 ring-white/5">
+              <Image
+                src="/images/beats-bots-culture.png"
+                alt="Beats, Bots, and Culture by DJ Macho — book cover"
+                fill
+                className="object-cover"
+                sizes="300px"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Book details */}
+          <div className="max-w-lg">
+            <Badge variant="chrome" size="md" className="mb-6">
+              <BookOpen className="w-3 h-3" />
+              New Book
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight uppercase leading-[1.1]">
+              Beats, Bots,
+              <br />
+              <span className="text-chrome-gradient">and Culture</span>
+            </h2>
+            <p className="mt-2 text-sm font-medium tracking-wide uppercase text-text-muted">
+              By DJ Macho
+            </p>
+            <p className="mt-5 text-text-secondary leading-relaxed">
+              Everything you need to know about AI as a music creative.
+              DJ Macho explores how artificial intelligence is transforming music
+              production, DJing, and the creative process — offering a grounded,
+              real-world perspective for artists navigating the intersection of
+              technology and culture.
+            </p>
+            <div className="mt-8">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-[0.15em] uppercase bg-text-primary text-bg-primary rounded-sm hover:bg-silver transition-colors duration-300"
+              >
+                Get the Book
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
       </Section>
 
       <Separator className="mx-6 md:mx-12 lg:mx-20 xl:mx-32" />
