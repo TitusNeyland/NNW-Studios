@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, AlertCircle, Music } from "lucide-react";
+import { ArrowLeft, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import type {
   BookingFormData,
   BookableService,
@@ -56,16 +55,18 @@ export function StepReview({
 
   return (
     <div>
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase">
-        Review Your Booking
-      </h2>
-      <p className="mt-2 text-sm text-text-secondary">
-        Please review all details before confirming your reservation.
-      </p>
+      <div className="mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+          Review Your Booking
+        </h2>
+        <p className="mt-2 text-[15px] text-text-secondary/80">
+          Please confirm all details before submitting.
+        </p>
+      </div>
 
-      <div className="mt-8 rounded-sm border border-border bg-surface overflow-hidden">
-        {/* Session details */}
-        <div className="p-6 space-y-4">
+      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] overflow-hidden">
+        {/* Session */}
+        <ReviewSection title="Session">
           <ReviewRow label="Service" value={service.name} />
           <ReviewRow
             label="Duration"
@@ -83,12 +84,12 @@ export function StepReview({
             label="Room"
             value={room?.name ?? "Assigned at check-in"}
           />
-        </div>
+        </ReviewSection>
 
-        <Separator />
+        <div className="h-px bg-white/[0.04] mx-6" />
 
-        {/* Date & time */}
-        <div className="p-6 space-y-4">
+        {/* Schedule */}
+        <ReviewSection title="Schedule">
           <ReviewRow
             label="Date"
             value={formData.date ? formatDateFull(formData.date) : "—"}
@@ -105,12 +106,12 @@ export function StepReview({
             label="Timezone"
             value={STUDIO_TIMEZONE.replace("_", " ")}
           />
-        </div>
+        </ReviewSection>
 
-        <Separator />
+        <div className="h-px bg-white/[0.04] mx-6" />
 
-        {/* Customer */}
-        <div className="p-6 space-y-4">
+        {/* Contact */}
+        <ReviewSection title="Contact">
           <ReviewRow label="Name" value={formData.customerName} />
           <ReviewRow label="Email" value={formData.customerEmail} />
           {formData.customerPhone && (
@@ -123,63 +124,71 @@ export function StepReview({
             <ReviewRow label="Notes" value={formData.projectNotes} />
           )}
           {formData.sessionFiles && formData.sessionFiles.length > 0 && (
-            <div>
-              <span className="text-xs font-medium tracking-[0.1em] uppercase text-text-muted">
+            <div className="pt-1">
+              <span className="text-[11px] font-medium tracking-[0.1em] uppercase text-text-muted/40 block mb-2">
                 Session Files
               </span>
-              <div className="mt-2 space-y-1">
+              <div className="space-y-1">
                 {formData.sessionFiles.map((file, i) => (
                   <div
                     key={`${file.name}-${i}`}
-                    className="flex items-center gap-2 text-sm text-text-secondary"
+                    className="flex items-center gap-2 text-[13px] text-text-secondary/70"
                   >
-                    <Music className="w-3.5 h-3.5 text-silver shrink-0" />
+                    <Music className="w-3 h-3 text-text-muted/30 shrink-0" />
                     <span className="truncate">{file.name}</span>
                   </div>
                 ))}
               </div>
             </div>
           )}
-        </div>
+        </ReviewSection>
 
-        <Separator />
+        <div className="h-px bg-white/[0.04] mx-6" />
 
         {/* Pricing */}
-        <div className="p-6 space-y-4 bg-surface-elevated">
-          <ReviewRow
-            label="Session Total"
-            value={formatCurrency(service.priceMinorUnits)}
-            bold
-          />
-          <ReviewRow
-            label="Deposit Required"
-            value={formatCurrency(service.depositMinorUnits)}
-          />
-          <p className="text-[10px] text-text-muted">
-            Payment integration deferred — no charge will be processed in this
-            demo. In production, deposits are collected via Stripe before
-            confirmation.
+        <div className="p-6 bg-white/[0.02]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[13px] text-text-muted/60">
+              Session Total
+            </span>
+            <span className="text-lg font-bold text-text-primary tabular-nums">
+              {formatCurrency(service.priceMinorUnits)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-[13px] text-text-muted/40">
+              Deposit Required
+            </span>
+            <span className="text-[13px] text-text-secondary tabular-nums">
+              {formatCurrency(service.depositMinorUnits)}
+            </span>
+          </div>
+          <p className="mt-4 text-[10px] text-text-muted/25 leading-relaxed">
+            Payment integration deferred — no charge will be processed. In
+            production, deposits are collected via Stripe before confirmation.
           </p>
         </div>
       </div>
 
-      {/* Cancellation note */}
-      <div className="mt-4 p-4 rounded-sm border border-border bg-surface flex items-start gap-3">
-        <AlertCircle className="w-4 h-4 text-text-muted shrink-0 mt-0.5" />
-        <div>
-          <p className="text-xs font-medium text-text-secondary">
-            Cancellation & Rescheduling
-          </p>
-          <p className="text-[10px] text-text-muted mt-1 leading-relaxed">
-            Policies are configured by NNW administration and will be enforced
-            upon booking confirmation. A calendar selection is not a confirmed
-            reservation until validated server-side.
-          </p>
-        </div>
+      {/* Policy note */}
+      <div className="mt-4 p-4 rounded-xl border border-white/[0.04] bg-white/[0.01]">
+        <p className="text-[11px] text-text-muted/40 leading-relaxed">
+          <span className="font-medium text-text-muted/60">
+            Cancellation &amp; Rescheduling —{" "}
+          </span>
+          Policies are configured by NNW administration and enforced upon
+          booking confirmation. A calendar selection is not a confirmed
+          reservation until validated server-side.
+        </p>
       </div>
 
-      <div className="mt-8 flex items-center justify-between">
-        <Button variant="ghost" size="md" onClick={onBack} disabled={submitting}>
+      <div className="mt-10 flex items-center justify-between">
+        <Button
+          variant="ghost"
+          size="md"
+          onClick={onBack}
+          disabled={submitting}
+        >
           <ArrowLeft className="w-4 h-4" />
           Back
         </Button>
@@ -192,34 +201,32 @@ export function StepReview({
           {submitting ? "Confirming..." : "Confirm Booking"}
         </Button>
       </div>
-
-      <p className="mt-4 text-[10px] text-text-muted/50 text-center tracking-wide">
-        Demo confirmation — server-side validation, atomic holds, and payment
-        processing implemented in Phase 4.
-      </p>
     </div>
   );
 }
 
-function ReviewRow({
-  label,
-  value,
-  bold,
+function ReviewSection({
+  title,
+  children,
 }: {
-  label: string;
-  value: string;
-  bold?: boolean;
+  title: string;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4">
-      <span className="text-xs font-medium tracking-[0.1em] uppercase text-text-muted shrink-0">
-        {label}
-      </span>
-      <span
-        className={`text-sm text-right ${bold ? "font-bold text-text-primary" : "text-text-secondary"}`}
-      >
-        {value}
-      </span>
+    <div className="p-6">
+      <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-text-muted/30 mb-4">
+        {title}
+      </p>
+      <div className="space-y-3">{children}</div>
+    </div>
+  );
+}
+
+function ReviewRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-start justify-between gap-6">
+      <span className="text-[13px] text-text-muted/50 shrink-0">{label}</span>
+      <span className="text-[13px] text-text-primary text-right">{value}</span>
     </div>
   );
 }

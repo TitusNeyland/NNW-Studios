@@ -24,7 +24,6 @@ interface StepDatetimeProps {
 function getNextNDays(n: number): string[] {
   const days: string[] = [];
   const now = new Date();
-  // Start from tomorrow (minimum notice)
   for (let i = 1; i <= n; i++) {
     const d = new Date(now);
     d.setDate(d.getDate() + i);
@@ -33,7 +32,11 @@ function getNextNDays(n: number): string[] {
   return days;
 }
 
-function formatDateLabel(dateStr: string): { day: string; date: string; month: string } {
+function formatDateLabel(dateStr: string): {
+  day: string;
+  date: string;
+  month: string;
+} {
   const d = new Date(dateStr + "T12:00:00");
   return {
     day: d.toLocaleDateString("en-US", { weekday: "short" }),
@@ -76,24 +79,25 @@ export function StepDatetime({
 
   return (
     <div>
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase">
-        Select Date & Time
-      </h2>
-      <p className="mt-2 text-sm text-text-secondary">
-        Choose an available date and time for your session.
-      </p>
-
-      <div className="mt-2 flex items-center gap-1.5 text-xs text-text-muted">
-        <Clock className="w-3.5 h-3.5" />
-        All times shown in {STUDIO_TIMEZONE.replace("_", " ")}
+      <div className="mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+          Select Date &amp; Time
+        </h2>
+        <p className="mt-2 text-[15px] text-text-secondary/80">
+          Find an available slot for your session.
+        </p>
+        <div className="mt-3 flex items-center gap-1.5 text-[11px] text-text-muted/40">
+          <Clock className="w-3 h-3" />
+          All times in {STUDIO_TIMEZONE.replace("_", " ")}
+        </div>
       </div>
 
-      {/* Date picker — horizontal scroll */}
-      <div className="mt-8">
-        <p className="text-xs font-medium tracking-[0.15em] uppercase text-text-muted mb-3">
+      {/* Date picker */}
+      <div>
+        <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-text-muted/40 mb-3">
           Date
         </p>
-        <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-none">
+        <div className="flex gap-2 overflow-x-auto pb-3 -mx-1 px-1 scrollbar-none">
           {dates.map((dateStr) => {
             const { day, date, month } = formatDateLabel(dateStr);
             const active = dateStr === selectedDate;
@@ -102,25 +106,35 @@ export function StepDatetime({
                 key={dateStr}
                 onClick={() => onDateChange(dateStr)}
                 className={cn(
-                  "shrink-0 flex flex-col items-center justify-center w-16 h-20 rounded-sm border transition-all duration-300",
+                  "shrink-0 flex flex-col items-center justify-center w-[68px] h-[84px] rounded-xl border transition-all duration-500",
                   active
-                    ? "border-silver bg-surface-elevated ring-1 ring-silver/30"
-                    : "border-border bg-surface hover:border-border/80"
+                    ? "border-white/20 bg-white/[0.07] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+                    : "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.03] hover:border-white/[0.08]"
                 )}
                 aria-pressed={active}
               >
-                <span className="text-[10px] font-medium tracking-wider uppercase text-text-muted">
+                <span
+                  className={cn(
+                    "text-[10px] font-medium tracking-widest uppercase transition-colors duration-500",
+                    active ? "text-text-secondary" : "text-text-muted/40"
+                  )}
+                >
                   {day}
                 </span>
                 <span
                   className={cn(
-                    "text-lg font-bold",
-                    active ? "text-text-primary" : "text-text-secondary"
+                    "text-xl font-semibold leading-tight mt-0.5 transition-colors duration-500",
+                    active ? "text-white" : "text-text-secondary/60"
                   )}
                 >
                   {date}
                 </span>
-                <span className="text-[10px] text-text-muted uppercase">
+                <span
+                  className={cn(
+                    "text-[10px] uppercase transition-colors duration-500",
+                    active ? "text-text-muted" : "text-text-muted/30"
+                  )}
+                >
                   {month}
                 </span>
               </button>
@@ -132,22 +146,24 @@ export function StepDatetime({
       {/* Time slots */}
       {selectedDate && (
         <div className="mt-8">
-          <p className="text-xs font-medium tracking-[0.15em] uppercase text-text-muted mb-1">
-            Available Times — {formatDateFull(selectedDate)}
-          </p>
-          <p className="text-[10px] text-text-muted/60 mb-4">
-            {service.durationMinutes / 60}-hour sessions
-          </p>
+          <div className="flex items-baseline justify-between mb-4">
+            <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-text-muted/40">
+              Available Times
+            </p>
+            <p className="text-[11px] text-text-muted/30">
+              {formatDateFull(selectedDate)}
+            </p>
+          </div>
 
           {slots.length === 0 ? (
-            <div className="p-8 rounded-sm border border-border bg-surface text-center">
-              <AlertCircle className="w-6 h-6 text-text-muted mx-auto mb-2" />
-              <p className="text-sm text-text-muted">
-                No availability on this date. Please select another day.
+            <div className="p-10 rounded-xl border border-white/[0.04] bg-white/[0.015] text-center">
+              <AlertCircle className="w-5 h-5 text-text-muted/30 mx-auto mb-3" />
+              <p className="text-[13px] text-text-muted/50">
+                No availability on this date.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
               {slots.map((slot) => {
                 const isSelected =
                   selectedSlot?.start === slot.start &&
@@ -158,17 +174,28 @@ export function StepDatetime({
                     onClick={() => slot.available && onSlotSelect(slot)}
                     disabled={!slot.available}
                     className={cn(
-                      "py-3 px-4 rounded-sm border text-center text-sm font-medium transition-all duration-300",
+                      "py-3 px-2 rounded-lg border text-center transition-all duration-500",
                       isSelected
-                        ? "border-silver bg-surface-elevated ring-1 ring-silver/30 text-text-primary"
+                        ? "border-white/20 bg-white/[0.07] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
                         : slot.available
-                          ? "border-border bg-surface text-text-secondary hover:border-border/80 hover:bg-surface-elevated"
-                          : "border-border/50 bg-bg-secondary text-text-muted/40 cursor-not-allowed line-through"
+                          ? "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.08]"
+                          : "border-transparent bg-white/[0.01] opacity-25 cursor-not-allowed"
                     )}
                     aria-pressed={isSelected}
                     aria-disabled={!slot.available}
                   >
-                    {slot.start}
+                    <span
+                      className={cn(
+                        "text-[13px] font-medium tabular-nums",
+                        isSelected
+                          ? "text-white"
+                          : slot.available
+                            ? "text-text-secondary/70"
+                            : "text-text-muted/30 line-through"
+                      )}
+                    >
+                      {slot.start}
+                    </span>
                   </button>
                 );
               })}
@@ -177,12 +204,7 @@ export function StepDatetime({
         </div>
       )}
 
-      <p className="mt-4 text-[10px] text-text-muted/50 tracking-wide">
-        Mock availability shown — real availability computed from engineer
-        schedules, room bookings, buffers, and blackout dates in Phase 4.
-      </p>
-
-      <div className="mt-8 flex items-center justify-between">
+      <div className="mt-10 flex items-center justify-between">
         <Button variant="ghost" size="md" onClick={onBack}>
           <ArrowLeft className="w-4 h-4" />
           Back

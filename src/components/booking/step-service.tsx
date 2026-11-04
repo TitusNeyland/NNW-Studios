@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, ArrowRight, Clock, DollarSign } from "lucide-react";
+import { ArrowRight, Clock, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import type { BookableService } from "@/features/booking/types";
@@ -21,14 +21,16 @@ export function StepService({
 }: StepServiceProps) {
   return (
     <div>
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase">
-        Select a Service
-      </h2>
-      <p className="mt-2 text-sm text-text-secondary">
-        Choose the session type that best fits your project.
-      </p>
+      <div className="mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+          Select a Service
+        </h2>
+        <p className="mt-2 text-[15px] text-text-secondary/80">
+          Choose the session type that fits your project.
+        </p>
+      </div>
 
-      <div className="mt-8 space-y-3">
+      <div className="space-y-2.5">
         {services
           .filter((s) => s.active)
           .sort((a, b) => a.sortOrder - b.sortOrder)
@@ -39,56 +41,62 @@ export function StepService({
                 key={service.id}
                 onClick={() => onSelect(service.id)}
                 className={cn(
-                  "w-full text-left p-5 md:p-6 rounded-sm border transition-all duration-300",
+                  "w-full text-left p-6 rounded-xl border transition-all duration-500 group",
                   selected
-                    ? "border-silver bg-surface-elevated ring-1 ring-silver/30"
-                    : "border-border bg-surface hover:border-border/80 hover:bg-surface-elevated"
+                    ? "border-white/20 bg-white/[0.05] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+                    : "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.03] hover:border-white/[0.08]"
                 )}
                 aria-pressed={selected}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start justify-between gap-6">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-bold tracking-wide uppercase">
-                      {service.name}
-                    </h3>
-                    <p className="mt-1 text-sm text-text-secondary leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    <div className="mt-3 flex flex-wrap gap-4 text-xs text-text-muted">
-                      <span className="inline-flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5" />
-                        {formatDuration(service.durationMinutes)}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5">
-                        <DollarSign className="w-3.5 h-3.5" />
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-[15px] font-semibold tracking-tight">
+                        {service.name}
+                      </h3>
+                      <span className="text-[15px] font-semibold text-text-secondary">
                         {formatCurrency(service.priceMinorUnits)}
                       </span>
                     </div>
+                    <p className="mt-1.5 text-[13px] text-text-muted/70 leading-relaxed">
+                      {service.description}
+                    </p>
 
-                    <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+                    <div className="mt-4 flex items-center gap-2 text-[11px] text-text-muted/50">
+                      <Clock className="w-3 h-3" />
+                      <span>{formatDuration(service.durationMinutes)}</span>
+                      <span className="text-white/10">·</span>
+                      <span>
+                        {formatCurrency(service.depositMinorUnits)} deposit
+                      </span>
+                    </div>
+
+                    <div className="mt-3.5 flex flex-wrap gap-1.5">
                       {service.features.map((f) => (
-                        <li
+                        <span
                           key={f}
-                          className="flex items-center gap-1.5 text-xs text-text-muted"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-text-muted/60 bg-white/[0.03] rounded-full border border-white/[0.04]"
                         >
-                          <CheckCircle2 className="w-3 h-3 text-silver shrink-0" />
                           {f}
-                        </li>
+                        </span>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
+                  {/* Selection indicator */}
                   <div
                     className={cn(
-                      "shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-300 mt-1",
+                      "shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500 mt-0.5",
                       selected
-                        ? "border-silver bg-silver"
-                        : "border-border"
+                        ? "bg-white"
+                        : "ring-1.5 ring-white/10 group-hover:ring-white/20"
                     )}
                   >
                     {selected && (
-                      <CheckCircle2 className="w-3.5 h-3.5 text-bg-primary" />
+                      <Check
+                        className="w-3.5 h-3.5 text-black"
+                        strokeWidth={3}
+                      />
                     )}
                   </div>
                 </div>
@@ -97,17 +105,8 @@ export function StepService({
           })}
       </div>
 
-      <p className="mt-4 text-[10px] text-text-muted/50 text-center tracking-wide">
-        Services, pricing, and durations are configurable by NNW administration.
-      </p>
-
-      <div className="mt-8 flex justify-end">
-        <Button
-          variant="primary"
-          size="lg"
-          disabled={!selectedId}
-          onClick={onNext}
-        >
+      <div className="mt-10 flex justify-end">
+        <Button variant="primary" size="lg" disabled={!selectedId} onClick={onNext}>
           Continue
           <ArrowRight className="w-4 h-4" />
         </Button>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/ui/section";
 import { BookingWizard } from "@/components/booking/booking-wizard";
 
 export const metadata: Metadata = {
@@ -15,8 +14,8 @@ export const metadata: Metadata = {
 
 export default function BookStudioPage() {
   return (
-    <Section className="pt-28 pb-20 md:pt-36 md:pb-28">
+    <div className="min-h-screen pt-28 pb-24 md:pt-36 md:pb-32 px-6 md:px-12 lg:px-20">
       <BookingWizard />
-    </Section>
+    </div>
   );
 }

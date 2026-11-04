@@ -9,7 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import type { BookingFormData } from "@/features/booking/types";
-import { customerSchema, type CustomerFormData } from "@/features/booking/validation";
+import {
+  customerSchema,
+  type CustomerFormData,
+} from "@/features/booking/validation";
 import { cn } from "@/lib/utils";
 
 const ACCEPTED_TYPES = [
@@ -24,7 +27,7 @@ const ACCEPTED_TYPES = [
   "audio/aac",
 ];
 const ACCEPTED_EXTENSIONS = ".mp3,.wav,.aiff,.aif,.flac,.ogg,.m4a,.aac";
-const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100 MB per file
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
 const MAX_FILES = 10;
 
 function formatFileSize(bytes: number): string {
@@ -90,10 +93,9 @@ export function StepDetails({
 
     const combined = [...files, ...newFiles];
     if (combined.length > MAX_FILES) {
-      setFileError(`You can upload a maximum of ${MAX_FILES} files.`);
+      setFileError(`Maximum of ${MAX_FILES} files allowed.`);
       return;
     }
-
     setFiles(combined);
   };
 
@@ -117,15 +119,18 @@ export function StepDetails({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase">
-        Your Details
-      </h2>
-      <p className="mt-2 text-sm text-text-secondary">
-        Tell us who you are and anything we should know about your session.
-      </p>
+      <div className="mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+          Your Details
+        </h2>
+        <p className="mt-2 text-[15px] text-text-secondary/80">
+          Tell us who you are and anything we should know.
+        </p>
+      </div>
 
-      <div className="mt-8 space-y-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="space-y-6">
+        {/* Name / Email row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="book-name">Full Name *</Label>
             <Input
@@ -147,7 +152,8 @@ export function StepDetails({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {/* Phone / Artist row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="book-phone">Phone</Label>
             <Input
@@ -167,49 +173,50 @@ export function StepDetails({
           </div>
         </div>
 
+        {/* Notes */}
         <div>
           <Label htmlFor="book-notes">Session Notes</Label>
           <Textarea
             id="book-notes"
-            placeholder="Anything we should know — references, session goals, special requirements..."
+            placeholder="References, session goals, special requirements..."
             className="min-h-[100px]"
             {...register("projectNotes")}
           />
         </div>
 
-        {/* Audio file upload */}
+        {/* File upload */}
         <div>
           <Label>Session Files</Label>
-          <p className="text-xs text-text-muted mt-0.5 mb-3">
-            Upload any audio files needed for your session — beats,
-            instrumentals, reference tracks, rough recordings, etc.
+          <p className="text-[11px] text-text-muted/40 mt-0.5 mb-3">
+            Upload beats, instrumentals, reference tracks, or rough recordings.
           </p>
 
-          {/* Drop zone */}
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
             onDragOver={(e) => {
               e.preventDefault();
-              e.currentTarget.classList.add("border-silver");
+              e.currentTarget.classList.add("border-white/20");
             }}
             onDragLeave={(e) => {
               e.preventDefault();
-              e.currentTarget.classList.remove("border-silver");
+              e.currentTarget.classList.remove("border-white/20");
             }}
             onDrop={(e) => {
               e.preventDefault();
-              e.currentTarget.classList.remove("border-silver");
+              e.currentTarget.classList.remove("border-white/20");
               addFiles(e.dataTransfer.files);
             }}
-            className="w-full p-6 rounded-sm border border-dashed border-border bg-surface hover:bg-surface-elevated hover:border-text-muted transition-colors duration-200 text-center cursor-pointer group"
+            className="w-full p-8 rounded-xl border border-dashed border-white/[0.06] bg-white/[0.01] hover:bg-white/[0.025] hover:border-white/[0.12] transition-all duration-500 text-center cursor-pointer group"
           >
-            <Upload className="w-6 h-6 text-text-muted mx-auto mb-2 group-hover:text-silver transition-colors" />
-            <p className="text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors">
+            <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.04] w-fit mx-auto mb-3 group-hover:bg-white/[0.05] transition-colors duration-500">
+              <Upload className="w-5 h-5 text-text-muted/40 group-hover:text-text-muted transition-colors duration-500" />
+            </div>
+            <p className="text-[13px] font-medium text-text-secondary/70 group-hover:text-text-primary transition-colors duration-500">
               Click to upload or drag &amp; drop
             </p>
-            <p className="text-[10px] text-text-muted mt-1">
-              MP3, WAV, AIFF, FLAC, OGG, M4A, AAC — up to 100 MB each, max{" "}
+            <p className="text-[10px] text-text-muted/30 mt-1">
+              MP3, WAV, AIFF, FLAC, OGG, M4A, AAC — up to 100 MB, max{" "}
               {MAX_FILES} files
             </p>
           </button>
@@ -226,69 +233,64 @@ export function StepDetails({
             }}
           />
 
-          {/* Error */}
           {fileError && (
-            <p className="mt-2 text-xs text-red-400" role="alert">
+            <p className="mt-2 text-[11px] text-red-400/80" role="alert">
               {fileError}
             </p>
           )}
 
-          {/* File list */}
           {files.length > 0 && (
             <div className="mt-3 space-y-1.5">
               {files.map((file, i) => (
                 <div
                   key={`${file.name}-${file.size}-${i}`}
-                  className="flex items-center gap-3 px-3 py-2 rounded-sm bg-surface border border-border"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]"
                 >
-                  <Music className="w-4 h-4 text-silver shrink-0" />
+                  <Music className="w-3.5 h-3.5 text-text-muted/40 shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-text-primary truncate">
+                    <p className="text-[13px] text-text-primary truncate">
                       {file.name}
                     </p>
-                    <p className="text-[10px] text-text-muted">
+                    <p className="text-[10px] text-text-muted/30">
                       {formatFileSize(file.size)}
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={() => removeFile(i)}
-                    className="p-1 rounded-sm text-text-muted hover:text-red-400 hover:bg-surface-elevated transition-colors"
+                    className="p-1.5 rounded-md text-text-muted/30 hover:text-red-400/80 hover:bg-white/[0.03] transition-colors duration-300"
                     aria-label={`Remove ${file.name}`}
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
               ))}
-              <p className="text-[10px] text-text-muted">
-                {files.length} file{files.length !== 1 ? "s" : ""} selected
-              </p>
             </div>
           )}
         </div>
 
-        {/* Policy acknowledgement */}
-        <div className="p-5 rounded-sm border border-border bg-surface">
+        {/* Policy */}
+        <div className="p-5 rounded-xl border border-white/[0.04] bg-white/[0.015]">
           <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
               {...register("policyAcknowledged")}
               className={cn(
-                "mt-1 h-4 w-4 rounded-sm border-border bg-surface text-silver accent-silver shrink-0",
-                errors.policyAcknowledged && "ring-2 ring-red-500/50"
+                "mt-1 h-4 w-4 rounded border-white/20 bg-transparent accent-white shrink-0",
+                errors.policyAcknowledged && "ring-2 ring-red-500/40"
               )}
             />
             <div>
-              <p className="text-sm text-text-primary font-medium">
+              <p className="text-[13px] text-text-primary font-medium">
                 I acknowledge the session policy
               </p>
-              <p className="mt-1 text-xs text-text-muted leading-relaxed">
-                I understand that booking confirmation, cancellation, and
-                rescheduling policies apply. Specific terms are displayed during
-                review and are configurable by NNW Studios.
+              <p className="mt-1 text-[11px] text-text-muted/40 leading-relaxed">
+                Booking confirmation, cancellation, and rescheduling policies
+                apply. Terms are displayed during review and configured by NNW
+                Studios.
               </p>
               {errors.policyAcknowledged && (
-                <p className="mt-1.5 text-xs text-red-400" role="alert">
+                <p className="mt-1.5 text-[11px] text-red-400/80" role="alert">
                   {errors.policyAcknowledged.message}
                 </p>
               )}
@@ -297,7 +299,7 @@ export function StepDetails({
         </div>
       </div>
 
-      <div className="mt-8 flex items-center justify-between">
+      <div className="mt-10 flex items-center justify-between">
         <Button variant="ghost" size="md" onClick={onBack} type="button">
           <ArrowLeft className="w-4 h-4" />
           Back
