@@ -6,10 +6,10 @@ export const siteConfig = {
   url: "https://nnwstudios.com",
   nav: {
     main: [
+      { label: "Studio", href: "/studio" },
       { label: "Culture", href: "/culture" },
       { label: "Experiences", href: "/experiences" },
       { label: "Strategy", href: "/strategy" },
-      { label: "Studio", href: "/studio" },
     ],
     cta: { label: "Book Studio", href: "/studio/book" },
   },

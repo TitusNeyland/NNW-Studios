@@ -34,6 +34,7 @@ const initialFormData: BookingFormData = {
   customerPhone: "",
   artistName: "",
   projectNotes: "",
+  sessionFiles: [],
   policyAcknowledged: false,
 };
 

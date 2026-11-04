@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, AlertCircle } from "lucide-react";
+import { ArrowLeft, AlertCircle, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import type {
@@ -121,6 +121,24 @@ export function StepReview({
           )}
           {formData.projectNotes && (
             <ReviewRow label="Notes" value={formData.projectNotes} />
+          )}
+          {formData.sessionFiles && formData.sessionFiles.length > 0 && (
+            <div>
+              <span className="text-xs font-medium tracking-[0.1em] uppercase text-text-muted">
+                Session Files
+              </span>
+              <div className="mt-2 space-y-1">
+                {formData.sessionFiles.map((file, i) => (
+                  <div
+                    key={`${file.name}-${i}`}
+                    className="flex items-center gap-2 text-sm text-text-secondary"
+                  >
+                    <Music className="w-3.5 h-3.5 text-silver shrink-0" />
+                    <span className="truncate">{file.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
         </div>
 

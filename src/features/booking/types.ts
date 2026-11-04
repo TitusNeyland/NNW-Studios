@@ -50,6 +50,7 @@ export interface BookingFormData {
   customerPhone: string;
   artistName: string;
   projectNotes: string;
+  sessionFiles: File[];
   policyAcknowledged: boolean;
 }
 
@@ -66,6 +67,7 @@ export interface BookingDraft {
     artistName: string;
   };
   projectNotes: string;
+  sessionFiles: File[];
   policyAcknowledged: boolean;
 }
 
