@@ -130,21 +130,52 @@ export default function CulturePage() {
             <p className="mt-2 text-sm font-medium tracking-wide uppercase text-text-muted">
               By DJ Macho
             </p>
-            <p className="mt-5 text-text-secondary leading-relaxed">
-              Everything you need to know about AI as a music creative.
-              DJ Macho explores how artificial intelligence is transforming music
-              production, DJing, and the creative process — offering a grounded,
-              real-world perspective for artists navigating the intersection of
-              technology and culture.
+            <p className="mt-4 text-lg text-text-primary font-medium italic leading-snug">
+              The future of music isn&rsquo;t coming — it&rsquo;s already here.
+            </p>
+            <p className="mt-4 text-text-secondary leading-relaxed">
+              AI has been quietly embedded in your workflow the entire time —
+              from playlists that know you better than you know yourself, to the
+              tools helping engineers mix faster, to the algorithms shaping what
+              the world hears. The real question is: are you controlling the
+              tools, or are they controlling you?
+            </p>
+            <ul className="mt-5 space-y-2 text-sm text-text-secondary">
+              <li className="flex items-start gap-2">
+                <span className="text-silver mt-0.5">—</span>
+                How AI is already embedded in your workflow
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-silver mt-0.5">—</span>
+                Practical ways to use AI for beat-making, songwriting &amp;
+                vocal production
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-silver mt-0.5">—</span>
+                Using AI as a tool vs. letting it replace your creativity
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-silver mt-0.5">—</span>
+                The ethical questions artists need to be asking right now
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-silver mt-0.5">—</span>
+                How to develop your own sound when everything can be generated
+              </li>
+            </ul>
+            <p className="mt-5 text-xs text-text-muted leading-relaxed">
+              Whether you&rsquo;re an artist, producer, engineer, or creative
+              trying to find your place in this new era — this book will help
+              you stay authentic while evolving with the times.
             </p>
             <div className="mt-8">
               <a
-                href="#"
+                href="https://www.amazon.com/Beats-Bots-Culture-Everything-Creative/dp/B0GVBL2NT1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-[0.15em] uppercase bg-text-primary text-bg-primary rounded-sm hover:bg-silver transition-colors duration-300"
               >
-                Get the Book
+                Get the Book on Amazon
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
