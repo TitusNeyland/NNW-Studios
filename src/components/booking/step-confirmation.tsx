@@ -2,14 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import {
-  Check,
-  Calendar,
-  Clock,
-  User,
-  MapPin,
-  Copy,
-} from "lucide-react";
+import { Check, Calendar, Clock, User, MapPin, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { BookingConfirmation } from "@/features/booking/types";
 
@@ -34,14 +27,14 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
           damping: 20,
           delay: 0.1,
         }}
-        className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white mb-8"
+        className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-black mb-8"
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.4, type: "spring", stiffness: 300 }}
         >
-          <Check className="w-10 h-10 text-black" strokeWidth={2.5} />
+          <Check className="w-10 h-10 text-white" strokeWidth={2.5} />
         </motion.div>
       </motion.div>
 
@@ -64,17 +57,17 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-6 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]"
+        className="mt-6 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white shadow-md shadow-white/5"
       >
-        <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-text-muted/40">
+        <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-neutral-400">
           Ref
         </span>
-        <span className="text-[15px] font-bold text-text-primary tracking-widest font-mono">
+        <span className="text-[15px] font-bold text-black tracking-widest font-mono">
           {confirmation.referenceId}
         </span>
         <button
           onClick={handleCopy}
-          className="p-1 text-text-muted/30 hover:text-white transition-colors duration-300"
+          className="p-1 text-neutral-300 hover:text-black transition-colors duration-300"
           aria-label="Copy reference ID"
         >
           <Copy className="w-3.5 h-3.5" />
@@ -87,7 +80,7 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         transition={{ delay: 0.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="mt-3"
       >
-        <span className="inline-flex items-center px-3 py-1 text-[10px] font-medium tracking-[0.15em] uppercase text-text-muted/60 bg-white/[0.03] rounded-full border border-white/[0.06]">
+        <span className="inline-flex items-center px-3 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase text-neutral-500 bg-neutral-100 rounded-full">
           {confirmation.status === "pending"
             ? "Pending Review"
             : confirmation.status}
@@ -99,7 +92,7 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-10 max-w-md mx-auto text-left rounded-2xl border border-white/[0.06] bg-white/[0.015] overflow-hidden"
+        className="mt-10 max-w-md mx-auto text-left rounded-2xl bg-white overflow-hidden shadow-lg shadow-white/5"
       >
         <div className="p-6 space-y-4">
           <DetailRow
@@ -119,23 +112,23 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
           />
           <DetailRow icon={MapPin} label="Room" value={confirmation.room} />
 
-          <div className="h-px bg-white/[0.04] my-1" />
+          <div className="h-px bg-neutral-100 my-1" />
 
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-text-muted/50">Service</span>
-            <span className="text-[13px] font-medium text-text-primary">
+            <span className="text-[13px] text-neutral-400">Service</span>
+            <span className="text-[13px] font-medium text-black">
               {confirmation.service}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-text-muted/50">Total</span>
-            <span className="text-[15px] font-bold text-text-primary tabular-nums">
+            <span className="text-[13px] text-neutral-400">Total</span>
+            <span className="text-[15px] font-bold text-black tabular-nums">
               {confirmation.totalFormatted}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-text-muted/40">Deposit</span>
-            <span className="text-[13px] text-text-secondary/60 tabular-nums">
+            <span className="text-[13px] text-neutral-300">Deposit</span>
+            <span className="text-[13px] text-neutral-500 tabular-nums">
               {confirmation.depositFormatted}
             </span>
           </div>
@@ -147,9 +140,9 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-4 max-w-md mx-auto text-left p-5 rounded-2xl border border-white/[0.04] bg-white/[0.01]"
+        className="mt-4 max-w-md mx-auto text-left p-5 rounded-2xl bg-white/90 border border-white/60"
       >
-        <h3 className="text-[10px] font-medium tracking-[0.2em] uppercase text-text-muted/30 mb-3">
+        <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-3">
           What happens next
         </h3>
         <ul className="space-y-2">
@@ -161,9 +154,9 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
           ].map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2.5 text-[13px] text-text-secondary/60"
+              className="flex items-start gap-2.5 text-[13px] text-neutral-500"
             >
-              <span className="text-text-muted/20 mt-0.5">→</span>
+              <span className="text-neutral-300 mt-0.5">→</span>
               {item}
             </li>
           ))}
@@ -203,12 +196,12 @@ function DetailRow({
 }) {
   return (
     <div className="flex items-start gap-3">
-      <Icon className="w-4 h-4 text-text-muted/25 shrink-0 mt-0.5" />
+      <Icon className="w-4 h-4 text-neutral-300 shrink-0 mt-0.5" />
       <div>
-        <p className="text-[10px] font-medium tracking-[0.15em] uppercase text-text-muted/30">
+        <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-neutral-400">
           {label}
         </p>
-        <p className="text-[13px] text-text-primary mt-0.5">{value}</p>
+        <p className="text-[13px] text-black mt-0.5">{value}</p>
       </div>
     </div>
   );

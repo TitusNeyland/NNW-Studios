@@ -43,29 +43,29 @@ export function StepService({
                 className={cn(
                   "w-full text-left p-6 rounded-xl border transition-all duration-500 group",
                   selected
-                    ? "border-white/20 bg-white/[0.05] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                    : "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.03] hover:border-white/[0.08]"
+                    ? "bg-white border-white shadow-lg shadow-white/10"
+                    : "bg-white/90 border-white/60 hover:bg-white hover:shadow-md hover:shadow-white/5"
                 )}
                 aria-pressed={selected}
               >
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-[15px] font-semibold tracking-tight">
+                      <h3 className="text-[15px] font-semibold tracking-tight text-black">
                         {service.name}
                       </h3>
-                      <span className="text-[15px] font-semibold text-text-secondary">
+                      <span className="text-[15px] font-semibold text-neutral-500">
                         {formatCurrency(service.priceMinorUnits)}
                       </span>
                     </div>
-                    <p className="mt-1.5 text-[13px] text-text-muted/70 leading-relaxed">
+                    <p className="mt-1.5 text-[13px] text-neutral-500 leading-relaxed">
                       {service.description}
                     </p>
 
-                    <div className="mt-4 flex items-center gap-2 text-[11px] text-text-muted/50">
+                    <div className="mt-4 flex items-center gap-2 text-[11px] text-neutral-400">
                       <Clock className="w-3 h-3" />
                       <span>{formatDuration(service.durationMinutes)}</span>
-                      <span className="text-white/10">·</span>
+                      <span className="text-neutral-300">·</span>
                       <span>
                         {formatCurrency(service.depositMinorUnits)} deposit
                       </span>
@@ -75,7 +75,7 @@ export function StepService({
                       {service.features.map((f) => (
                         <span
                           key={f}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-text-muted/60 bg-white/[0.03] rounded-full border border-white/[0.04]"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-neutral-500 bg-neutral-100 rounded-full"
                         >
                           {f}
                         </span>
@@ -88,13 +88,13 @@ export function StepService({
                     className={cn(
                       "shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500 mt-0.5",
                       selected
-                        ? "bg-white"
-                        : "ring-1.5 ring-white/10 group-hover:ring-white/20"
+                        ? "bg-black"
+                        : "ring-1.5 ring-neutral-300 group-hover:ring-neutral-400"
                     )}
                   >
                     {selected && (
                       <Check
-                        className="w-3.5 h-3.5 text-black"
+                        className="w-3.5 h-3.5 text-white"
                         strokeWidth={3}
                       />
                     )}

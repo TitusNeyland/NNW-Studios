@@ -63,8 +63,8 @@ export function StepEngineer({
               className={cn(
                 "flex items-center gap-4 p-5 rounded-xl border text-left transition-all duration-500",
                 active
-                  ? "border-white/20 bg-white/[0.05] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                  : "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.03] hover:border-white/[0.08]"
+                  ? "bg-white border-white shadow-lg shadow-white/10"
+                  : "bg-white/90 border-white/60 hover:bg-white hover:shadow-md hover:shadow-white/5"
               )}
               aria-pressed={active}
             >
@@ -72,23 +72,23 @@ export function StepEngineer({
                 className={cn(
                   "p-2.5 rounded-lg transition-colors duration-500",
                   active
-                    ? "bg-white/10"
-                    : "bg-white/[0.03] border border-white/[0.05]"
+                    ? "bg-black"
+                    : "bg-neutral-100"
                 )}
               >
                 <Icon
                   className={cn(
                     "w-4 h-4 transition-colors duration-500",
-                    active ? "text-white" : "text-text-muted/50"
+                    active ? "text-white" : "text-neutral-400"
                   )}
                   strokeWidth={1.5}
                 />
               </div>
               <div>
-                <p className="text-[13px] font-semibold tracking-tight">
+                <p className="text-[13px] font-semibold tracking-tight text-black">
                   {opt.title}
                 </p>
-                <p className="text-[11px] text-text-muted/50 mt-0.5">
+                <p className="text-[11px] text-neutral-400 mt-0.5">
                   {opt.desc}
                 </p>
               </div>
@@ -111,29 +111,29 @@ export function StepEngineer({
                   className={cn(
                     "w-full text-left p-6 rounded-xl border transition-all duration-500 group",
                     selected
-                      ? "border-white/20 bg-white/[0.05] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                      : "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.03] hover:border-white/[0.08]"
+                      ? "bg-white border-white shadow-lg shadow-white/10"
+                      : "bg-white/90 border-white/60 hover:bg-white hover:shadow-md hover:shadow-white/5"
                   )}
                   aria-pressed={selected}
                 >
                   <div className="flex items-start justify-between gap-5">
                     <div className="flex-1">
                       <div className="flex items-baseline gap-2">
-                        <h3 className="text-[15px] font-semibold tracking-tight">
+                        <h3 className="text-[15px] font-semibold tracking-tight text-black">
                           {eng.name}
                         </h3>
-                        <span className="text-[11px] text-text-muted/40">
+                        <span className="text-[11px] text-neutral-400">
                           {eng.title}
                         </span>
                       </div>
-                      <p className="mt-2 text-[13px] text-text-muted/60 leading-relaxed">
+                      <p className="mt-2 text-[13px] text-neutral-500 leading-relaxed">
                         {eng.bio}
                       </p>
                       <div className="mt-3 flex flex-wrap gap-1.5">
                         {eng.specialties.map((s) => (
                           <span
                             key={s}
-                            className="px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-text-muted/50 bg-white/[0.03] rounded-full border border-white/[0.04]"
+                            className="px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-neutral-500 bg-neutral-100 rounded-full"
                           >
                             {s}
                           </span>
@@ -144,13 +144,13 @@ export function StepEngineer({
                       className={cn(
                         "shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500 mt-0.5",
                         selected
-                          ? "bg-white"
-                          : "ring-1.5 ring-white/10 group-hover:ring-white/20"
+                          ? "bg-black"
+                          : "ring-1.5 ring-neutral-300 group-hover:ring-neutral-400"
                       )}
                     >
                       {selected && (
                         <Check
-                          className="w-3.5 h-3.5 text-black"
+                          className="w-3.5 h-3.5 text-white"
                           strokeWidth={3}
                         />
                       )}

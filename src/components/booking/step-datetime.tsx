@@ -108,15 +108,15 @@ export function StepDatetime({
                 className={cn(
                   "shrink-0 flex flex-col items-center justify-center w-[68px] h-[84px] rounded-xl border transition-all duration-500",
                   active
-                    ? "border-white/20 bg-white/[0.07] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                    : "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.03] hover:border-white/[0.08]"
+                    ? "bg-white border-white shadow-lg shadow-white/10"
+                    : "bg-white/90 border-white/60 hover:bg-white hover:shadow-md hover:shadow-white/5"
                 )}
                 aria-pressed={active}
               >
                 <span
                   className={cn(
                     "text-[10px] font-medium tracking-widest uppercase transition-colors duration-500",
-                    active ? "text-text-secondary" : "text-text-muted/40"
+                    active ? "text-neutral-500" : "text-neutral-400"
                   )}
                 >
                   {day}
@@ -124,7 +124,7 @@ export function StepDatetime({
                 <span
                   className={cn(
                     "text-xl font-semibold leading-tight mt-0.5 transition-colors duration-500",
-                    active ? "text-white" : "text-text-secondary/60"
+                    active ? "text-black" : "text-neutral-600"
                   )}
                 >
                   {date}
@@ -132,7 +132,7 @@ export function StepDatetime({
                 <span
                   className={cn(
                     "text-[10px] uppercase transition-colors duration-500",
-                    active ? "text-text-muted" : "text-text-muted/30"
+                    active ? "text-neutral-400" : "text-neutral-400"
                   )}
                 >
                   {month}
@@ -156,9 +156,9 @@ export function StepDatetime({
           </div>
 
           {slots.length === 0 ? (
-            <div className="p-10 rounded-xl border border-white/[0.04] bg-white/[0.015] text-center">
-              <AlertCircle className="w-5 h-5 text-text-muted/30 mx-auto mb-3" />
-              <p className="text-[13px] text-text-muted/50">
+            <div className="p-10 rounded-xl bg-white/90 border border-white/60 text-center">
+              <AlertCircle className="w-5 h-5 text-neutral-300 mx-auto mb-3" />
+              <p className="text-[13px] text-neutral-500">
                 No availability on this date.
               </p>
             </div>
@@ -176,10 +176,10 @@ export function StepDatetime({
                     className={cn(
                       "py-3 px-2 rounded-lg border text-center transition-all duration-500",
                       isSelected
-                        ? "border-white/20 bg-white/[0.07] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+                        ? "bg-white border-white shadow-lg shadow-white/10"
                         : slot.available
-                          ? "border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.08]"
-                          : "border-transparent bg-white/[0.01] opacity-25 cursor-not-allowed"
+                          ? "bg-white/90 border-white/60 hover:bg-white hover:shadow-md hover:shadow-white/5"
+                          : "bg-white/20 border-white/10 opacity-40 cursor-not-allowed"
                     )}
                     aria-pressed={isSelected}
                     aria-disabled={!slot.available}
@@ -188,10 +188,10 @@ export function StepDatetime({
                       className={cn(
                         "text-[13px] font-medium tabular-nums",
                         isSelected
-                          ? "text-white"
+                          ? "text-black"
                           : slot.available
-                            ? "text-text-secondary/70"
-                            : "text-text-muted/30 line-through"
+                            ? "text-neutral-600"
+                            : "text-neutral-500 line-through"
                       )}
                     >
                       {slot.start}
