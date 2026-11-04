@@ -24,7 +24,7 @@ export const siteConfig = {
     contact: {
       email: "hello@nnwstudios.com",
       phone: "(000) 000-0000",
-      location: "City, State",
+      location: "Houston, Texas",
     },
     legal: [
       { label: "Privacy Policy", href: "/privacy" },

@@ -32,7 +32,7 @@ const eventsData: Record<
     title: "NOCTURNAL VOL. IV",
     type: "Curated Party",
     date: "Coming Soon",
-    location: "City, State",
+    location: "Houston, TX",
     venue: "Venue TBA",
     description:
       "The next chapter in our signature nightlife series. An immersive evening of curated sound, visual art, and community.",
@@ -44,7 +44,7 @@ const eventsData: Record<
     title: "SOUND CHECK LIVE",
     type: "Live Performance",
     date: "Coming Soon",
-    location: "City, State",
+    location: "Houston, TX",
     venue: "Venue TBA",
     description:
       "Live performances from emerging artists and established voices in an intimate venue setting.",
@@ -56,7 +56,7 @@ const eventsData: Record<
     title: "THE EXCHANGE",
     type: "Industry Night",
     date: "Coming Soon",
-    location: "City, State",
+    location: "Houston, TX",
     venue: "Venue TBA",
     description:
       "A networking night for creatives, industry professionals, and artists.",
