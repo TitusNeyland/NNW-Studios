@@ -8,46 +8,57 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   return (
     <section
-      className="relative flex items-center justify-center min-h-screen overflow-hidden"
+      className="relative flex items-center justify-center min-h-screen overflow-hidden grain"
       aria-label="Hero"
     >
-      {/* Background layer */}
+      {/* Background layers */}
       <div className="absolute inset-0 bg-bg-primary">
-        {/* Atmospheric gradient overlay — replaces real video/image until assets exist */}
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-secondary/60 to-bg-primary" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(192,192,192,0.04)_0%,transparent_70%)]" />
-        {/* Grain texture */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIxIi8+PC9zdmc+')]" />
+        {/* Radial spotlight */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(192,192,192,0.08),transparent_70%)]" />
+        {/* Secondary ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(192,192,192,0.03),transparent_60%)]" />
+        {/* Subtle horizontal line grid */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(0deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
+          }}
+        />
       </div>
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32 text-center">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          initial={{ opacity: 0, filter: "blur(10px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1.2, delay: 0.2 }}
         >
-          <p className="text-xs md:text-sm font-medium tracking-[0.3em] uppercase text-text-muted mb-6 md:mb-8">
-            Est. MMXX
+          <p className="text-[10px] md:text-xs font-medium tracking-[0.4em] uppercase text-text-muted/60 mb-8 md:mb-10">
+            Est. MMXX — Houston, TX
           </p>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-[0.95] uppercase"
+          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{
+            duration: 1,
+            delay: 0.5,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold tracking-tighter leading-[0.9] uppercase"
         >
           Never Not
           <br />
-          <span className="text-chrome-gradient">Working.</span>
+          <span className="text-shimmer">Working.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed"
+          transition={{ duration: 1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 md:mt-10 text-base md:text-lg text-text-secondary max-w-lg mx-auto leading-relaxed tracking-tight"
         >
           A creative ecosystem built around sound, culture,
           <br className="hidden md:block" />
@@ -57,8 +68,8 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link href="/studio/book">
             <Button variant="primary" size="lg">
@@ -66,7 +77,7 @@ export function Hero() {
             </Button>
           </Link>
           <Link href="#divisions">
-            <Button variant="secondary" size="lg">
+            <Button variant="ghost" size="lg">
               Explore NNW
             </Button>
           </Link>
@@ -76,17 +87,20 @@ export function Hero() {
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ opacity: 0.4 }}
+        transition={{ delay: 2.5, duration: 1.5 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-5 h-5 text-text-muted" />
+          <ChevronDown className="w-4 h-4 text-text-muted" strokeWidth={1.5} />
         </motion.div>
       </motion.div>
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-primary to-transparent" />
     </section>
   );
 }

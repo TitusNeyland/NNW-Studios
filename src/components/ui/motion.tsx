@@ -8,11 +8,14 @@ import {
   type HTMLMotionProps,
 } from "motion/react";
 
+/* ── Apple-style easing: fast out, smooth in ── */
+const ease = [0.16, 1, 0.3, 1] as const;
+
 /* ── Reusable animation presets ── */
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
 
 export const fadeIn: Variants = {
@@ -21,17 +24,17 @@ export const fadeIn: Variants = {
 };
 
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1 },
+  hidden: { opacity: 0, scale: 0.96, filter: "blur(4px)" },
+  visible: { opacity: 1, scale: 1, filter: "blur(0px)" },
 };
 
 export const slideInLeft: Variants = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, x: -30 },
   visible: { opacity: 1, x: 0 },
 };
 
 export const slideInRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
+  hidden: { opacity: 0, x: 30 },
   visible: { opacity: 1, x: 0 },
 };
 
@@ -39,7 +42,7 @@ export const staggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
       delayChildren: 0.1,
     },
   },
@@ -64,7 +67,7 @@ export function Reveal({
   ...props
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, amount: 0.2 });
+  const inView = useInView(ref, { once, amount: 0.15 });
 
   return (
     <motion.div
@@ -72,7 +75,7 @@ export function Reveal({
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={variants}
-      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay }}
+      transition={{ duration: 0.8, ease, delay }}
       className={className}
       {...props}
     >
@@ -95,12 +98,12 @@ export function Stagger({
   children,
   className,
   once = true,
-  stagger = 0.1,
+  stagger = 0.08,
   delayChildren = 0.1,
   ...props
 }: StaggerProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, amount: 0.15 });
+  const inView = useInView(ref, { once, amount: 0.1 });
 
   return (
     <motion.div
@@ -134,7 +137,7 @@ export function StaggerItem({
   return (
     <motion.div
       variants={fadeUp}
-      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.7, ease }}
       className={className}
       {...props}
     >

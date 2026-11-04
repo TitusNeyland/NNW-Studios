@@ -3,18 +3,19 @@
 /* ── NNW Studios Design Tokens ── */
 :root {
   --bg-primary: #050505;
-  --bg-secondary: #101010;
-  --surface: #181818;
-  --surface-elevated: #242424;
-  --text-primary: #f5f5f5;
-  --text-secondary: #a3a3a3;
-  --text-muted: #737373;
-  --border: #303030;
+  --bg-secondary: #0a0a0a;
+  --surface: #141414;
+  --surface-elevated: #1c1c1e;
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-muted: #6e6e73;
+  --border: #2a2a2e;
   --silver: #c0c0c0;
   --chrome: #e8e8e8;
 
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
 }
 
 @theme inline {
@@ -38,16 +39,18 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
+  letter-spacing: -0.011em;
 }
 
 ::selection {
-  background: rgba(192, 192, 192, 0.3);
+  background: rgba(192, 192, 192, 0.25);
   color: var(--text-primary);
 }
 
@@ -63,7 +66,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -80,8 +83,9 @@ body {
   background: linear-gradient(
     135deg,
     var(--text-muted) 0%,
-    var(--chrome) 45%,
-    var(--silver) 55%,
+    var(--chrome) 40%,
+    #fff 50%,
+    var(--silver) 60%,
     var(--text-muted) 100%
   );
   -webkit-background-clip: text;
@@ -108,6 +112,79 @@ body {
   );
 }
 
+/* ── Glass Effect ── */
+.glass {
+  background: rgba(20, 20, 22, 0.7);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+}
+
+/* ── Glow Utilities ── */
+.glow-sm {
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.04),
+    0 0 60px rgba(192, 192, 192, 0.02);
+}
+
+.glow-md {
+  box-shadow: 0 0 30px rgba(192, 192, 192, 0.06),
+    0 0 80px rgba(192, 192, 192, 0.03);
+}
+
+/* ── Shimmer Animation ── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--text-muted) 0%,
+    var(--chrome) 25%,
+    #fff 50%,
+    var(--chrome) 75%,
+    var(--text-muted) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+/* ── Grain Overlay (applied via pseudo-element) ── */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjY1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIxIi8+PC9zdmc+");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Smooth Link Underline ── */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--silver);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -120,5 +197,9 @@ body {
 
   html {
     scroll-behavior: auto;
+  }
+
+  .text-shimmer {
+    animation: none;
   }
 }

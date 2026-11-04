@@ -31,8 +31,11 @@ const services = [
 
 export function StudioFeature() {
   return (
-    <Section className="py-24 md:py-32 lg:py-40 bg-bg-secondary">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+    <Section className="py-28 md:py-36 lg:py-44 bg-bg-secondary grain relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(192,192,192,0.03),transparent_70%)] pointer-events-none" />
+
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         {/* Left: copy */}
         <div>
           <Reveal>
@@ -43,23 +46,25 @@ export function StudioFeature() {
             />
           </Reveal>
 
-          <Stagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <Stagger className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {services.map((svc) => {
               const Icon = svc.icon;
               return (
                 <StaggerItem
                   key={svc.label}
-                  className="flex items-start gap-4 p-4 rounded-sm bg-surface/50 border border-border/50"
+                  className="group flex items-start gap-4 p-5 rounded-lg bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] hover:bg-white/[0.04] transition-all duration-500"
                 >
-                  <Icon
-                    className="w-5 h-5 text-silver mt-0.5 shrink-0"
-                    strokeWidth={1.5}
-                  />
+                  <div className="p-2 rounded-md bg-white/[0.03] border border-white/[0.05] group-hover:border-silver/20 transition-colors duration-500">
+                    <Icon
+                      className="w-4 h-4 text-text-muted group-hover:text-silver transition-colors duration-500"
+                      strokeWidth={1.5}
+                    />
+                  </div>
                   <div>
-                    <p className="text-sm font-semibold tracking-wide uppercase text-text-primary">
+                    <p className="text-[13px] font-semibold tracking-wide uppercase text-text-primary">
                       {svc.label}
                     </p>
-                    <p className="mt-1 text-xs text-text-muted leading-relaxed">
+                    <p className="mt-1 text-xs text-text-muted/80 leading-relaxed">
                       {svc.description}
                     </p>
                   </div>
@@ -68,7 +73,7 @@ export function StudioFeature() {
             })}
           </Stagger>
 
-          <Reveal delay={0.3} className="mt-10 flex flex-col sm:flex-row gap-4">
+          <Reveal delay={0.3} className="mt-12 flex flex-col sm:flex-row gap-4">
             <Link href="/studio/book">
               <Button variant="primary" size="lg">
                 Book a Session
@@ -85,24 +90,22 @@ export function StudioFeature() {
         {/* Right: visual placeholder */}
         <Reveal
           delay={0.2}
-          className="relative aspect-[4/5] lg:aspect-[3/4] rounded-sm overflow-hidden bg-surface border border-border"
+          className="relative aspect-[4/5] lg:aspect-[3/4] rounded-lg overflow-hidden bg-surface/50 border border-white/[0.04] glow-sm"
         >
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center px-8">
-              <Mic
-                className="w-12 h-12 text-border mx-auto mb-4"
-                strokeWidth={1}
-              />
-              <p className="text-xs text-text-muted tracking-[0.15em] uppercase">
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05] w-fit mx-auto mb-5">
+                <Mic
+                  className="w-10 h-10 text-text-muted/30"
+                  strokeWidth={1}
+                />
+              </div>
+              <p className="text-[10px] text-text-muted/40 tracking-[0.2em] uppercase">
                 Studio photography placeholder
-              </p>
-              <p className="text-[10px] text-text-muted/60 mt-2">
-                Replace with real studio imagery
               </p>
             </div>
           </div>
-          {/* Decorative gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-secondary/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-secondary via-transparent to-transparent" />
         </Reveal>
       </div>
     </Section>
