@@ -25,7 +25,7 @@ export function StepService({
         <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Select a Service
         </h2>
-        <p className="mt-2 text-[15px] text-text-secondary/80">
+        <p className="mt-2 text-base text-text-secondary/80">
           Choose the session type that fits your project.
         </p>
       </div>
@@ -51,19 +51,19 @@ export function StepService({
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-[15px] font-semibold tracking-tight text-black">
+                      <h3 className="text-lg font-semibold tracking-tight text-black">
                         {service.name}
                       </h3>
-                      <span className="text-[15px] font-semibold text-neutral-500">
+                      <span className="text-base font-semibold text-neutral-500">
                         {formatCurrency(service.priceMinorUnits)}
                       </span>
                     </div>
-                    <p className="mt-1.5 text-[13px] text-neutral-500 leading-relaxed">
+                    <p className="mt-1.5 text-sm text-neutral-500 leading-relaxed">
                       {service.description}
                     </p>
 
-                    <div className="mt-4 flex items-center gap-2 text-[11px] text-neutral-400">
-                      <Clock className="w-3 h-3" />
+                    <div className="mt-4 flex items-center gap-2 text-xs text-neutral-400">
+                      <Clock className="w-3.5 h-3.5" />
                       <span>{formatDuration(service.durationMinutes)}</span>
                       <span className="text-neutral-300">·</span>
                       <span>
@@ -75,7 +75,7 @@ export function StepService({
                       {service.features.map((f) => (
                         <span
                           key={f}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-neutral-500 bg-neutral-100 rounded-full"
+                          className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium tracking-wide uppercase text-neutral-500 bg-neutral-100 rounded-full"
                         >
                           {f}
                         </span>

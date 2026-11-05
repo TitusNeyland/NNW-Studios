@@ -33,7 +33,7 @@ export function StepEngineer({
         <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Choose Your Engineer
         </h2>
-        <p className="mt-2 text-[15px] text-text-secondary/80">
+        <p className="mt-2 text-base text-text-secondary/80">
           Select a preferred engineer or let us assign the best match.
         </p>
       </div>
@@ -85,10 +85,10 @@ export function StepEngineer({
                 />
               </div>
               <div>
-                <p className="text-[13px] font-semibold tracking-tight text-black">
+                <p className="text-sm font-semibold tracking-tight text-black">
                   {opt.title}
                 </p>
-                <p className="text-[11px] text-neutral-400 mt-0.5">
+                <p className="text-xs text-neutral-400 mt-0.5">
                   {opt.desc}
                 </p>
               </div>
@@ -119,21 +119,21 @@ export function StepEngineer({
                   <div className="flex items-start justify-between gap-5">
                     <div className="flex-1">
                       <div className="flex items-baseline gap-2">
-                        <h3 className="text-[15px] font-semibold tracking-tight text-black">
+                        <h3 className="text-lg font-semibold tracking-tight text-black">
                           {eng.name}
                         </h3>
-                        <span className="text-[11px] text-neutral-400">
+                        <span className="text-xs text-neutral-400">
                           {eng.title}
                         </span>
                       </div>
-                      <p className="mt-2 text-[13px] text-neutral-500 leading-relaxed">
+                      <p className="mt-2 text-sm text-neutral-500 leading-relaxed">
                         {eng.bio}
                       </p>
                       <div className="mt-3 flex flex-wrap gap-1.5">
                         {eng.specialties.map((s) => (
                           <span
                             key={s}
-                            className="px-2.5 py-1 text-[10px] font-medium tracking-wide uppercase text-neutral-500 bg-neutral-100 rounded-full"
+                            className="px-3 py-1 text-xs font-medium tracking-wide uppercase text-neutral-500 bg-neutral-100 rounded-full"
                           >
                             {s}
                           </span>

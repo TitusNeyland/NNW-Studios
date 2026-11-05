@@ -123,7 +123,7 @@ export function StepDetails({
         <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Your Details
         </h2>
-        <p className="mt-2 text-[15px] text-text-secondary/80">
+        <p className="mt-2 text-base text-text-secondary/80">
           Tell us who you are and anything we should know.
         </p>
       </div>
@@ -135,7 +135,7 @@ export function StepDetails({
           <div>
             <label
               htmlFor="book-name"
-              className="block text-[11px] font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
+              className="block text-xs font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
             >
               Full Name *
             </label>
@@ -144,14 +144,14 @@ export function StepDetails({
               placeholder="Your name"
               {...register("customerName")}
               className={cn(
-                "w-full h-11 px-4 rounded-lg border bg-neutral-50 text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20",
+                "w-full h-12 px-4 rounded-lg border bg-neutral-50 text-base text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20",
                 errors.customerName
                   ? "border-red-300"
                   : "border-neutral-200"
               )}
             />
             {errors.customerName && (
-              <p className="mt-1 text-[11px] text-red-500">
+              <p className="mt-1 text-xs text-red-500">
                 {errors.customerName.message}
               </p>
             )}
@@ -159,7 +159,7 @@ export function StepDetails({
           <div>
             <label
               htmlFor="book-email"
-              className="block text-[11px] font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
+              className="block text-xs font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
             >
               Email *
             </label>
@@ -169,14 +169,14 @@ export function StepDetails({
               placeholder="you@example.com"
               {...register("customerEmail")}
               className={cn(
-                "w-full h-11 px-4 rounded-lg border bg-neutral-50 text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20",
+                "w-full h-12 px-4 rounded-lg border bg-neutral-50 text-base text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20",
                 errors.customerEmail
                   ? "border-red-300"
                   : "border-neutral-200"
               )}
             />
             {errors.customerEmail && (
-              <p className="mt-1 text-[11px] text-red-500">
+              <p className="mt-1 text-xs text-red-500">
                 {errors.customerEmail.message}
               </p>
             )}
@@ -188,7 +188,7 @@ export function StepDetails({
           <div>
             <label
               htmlFor="book-phone"
-              className="block text-[11px] font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
+              className="block text-xs font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
             >
               Phone
             </label>
@@ -197,13 +197,13 @@ export function StepDetails({
               type="tel"
               placeholder="(000) 000-0000"
               {...register("customerPhone")}
-              className="w-full h-11 px-4 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20"
+              className="w-full h-12 px-4 rounded-lg border border-neutral-200 bg-neutral-50 text-base text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20"
             />
           </div>
           <div>
             <label
               htmlFor="book-artist"
-              className="block text-[11px] font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
+              className="block text-xs font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
             >
               Artist / Project Name
             </label>
@@ -211,7 +211,7 @@ export function StepDetails({
               id="book-artist"
               placeholder="Optional"
               {...register("artistName")}
-              className="w-full h-11 px-4 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20"
+              className="w-full h-12 px-4 rounded-lg border border-neutral-200 bg-neutral-50 text-base text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20"
             />
           </div>
         </div>
@@ -220,7 +220,7 @@ export function StepDetails({
         <div>
           <label
             htmlFor="book-notes"
-            className="block text-[11px] font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
+            className="block text-xs font-semibold tracking-wide uppercase text-neutral-500 mb-1.5"
           >
             Session Notes
           </label>
@@ -228,16 +228,16 @@ export function StepDetails({
             id="book-notes"
             placeholder="References, session goals, special requirements..."
             {...register("projectNotes")}
-            className="w-full min-h-[100px] px-4 py-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 resize-y focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20"
+            className="w-full min-h-[110px] px-4 py-3 rounded-lg border border-neutral-200 bg-neutral-50 text-base text-black placeholder:text-neutral-400 transition-colors duration-300 resize-y focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/20"
           />
         </div>
 
         {/* File upload */}
         <div>
-          <p className="text-[11px] font-semibold tracking-wide uppercase text-neutral-500 mb-1">
+          <p className="text-xs font-semibold tracking-wide uppercase text-neutral-500 mb-1">
             Session Files
           </p>
-          <p className="text-[11px] text-neutral-400 mb-3">
+          <p className="text-xs text-neutral-400 mb-3">
             Upload beats, instrumentals, reference tracks, or rough recordings.
           </p>
 
@@ -262,10 +262,10 @@ export function StepDetails({
             <div className="p-2.5 rounded-lg bg-neutral-100 w-fit mx-auto mb-2.5 group-hover:bg-neutral-200 transition-colors duration-500">
               <Upload className="w-5 h-5 text-neutral-400 group-hover:text-neutral-600 transition-colors duration-500" />
             </div>
-            <p className="text-[13px] font-medium text-neutral-600 group-hover:text-black transition-colors duration-500">
+            <p className="text-sm font-medium text-neutral-600 group-hover:text-black transition-colors duration-500">
               Click to upload or drag &amp; drop
             </p>
-            <p className="text-[10px] text-neutral-400 mt-1">
+            <p className="text-xs text-neutral-400 mt-1">
               MP3, WAV, AIFF, FLAC, OGG, M4A, AAC — up to 100 MB, max{" "}
               {MAX_FILES} files
             </p>
@@ -284,7 +284,7 @@ export function StepDetails({
           />
 
           {fileError && (
-            <p className="mt-2 text-[11px] text-red-500" role="alert">
+            <p className="mt-2 text-xs text-red-500" role="alert">
               {fileError}
             </p>
           )}
@@ -298,10 +298,10 @@ export function StepDetails({
                 >
                   <Music className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-[13px] text-black truncate">
+                    <p className="text-sm text-black truncate">
                       {file.name}
                     </p>
-                    <p className="text-[10px] text-neutral-400">
+                    <p className="text-xs text-neutral-400">
                       {formatFileSize(file.size)}
                     </p>
                   </div>
@@ -333,16 +333,16 @@ export function StepDetails({
             )}
           />
           <div>
-            <p className="text-[13px] text-black font-medium">
+            <p className="text-sm text-black font-medium">
               I acknowledge the session policy
             </p>
-            <p className="mt-1 text-[11px] text-neutral-400 leading-relaxed">
+            <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
               Booking confirmation, cancellation, and rescheduling policies
               apply. Terms are displayed during review and configured by NNW
               Studios.
             </p>
             {errors.policyAcknowledged && (
-              <p className="mt-1.5 text-[11px] text-red-500" role="alert">
+              <p className="mt-1.5 text-xs text-red-500" role="alert">
                 {errors.policyAcknowledged.message}
               </p>
             )}

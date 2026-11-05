@@ -28,7 +28,7 @@ export function BookingStepper({
               <div className="flex items-center gap-3">
                 <span
                   className={cn(
-                    "flex items-center justify-center w-8 h-8 rounded-full text-[11px] font-semibold shrink-0 transition-all duration-500",
+                    "flex items-center justify-center w-8 h-8 rounded-full text-xs font-semibold shrink-0 transition-all duration-500",
                     isCompleted
                       ? "bg-white text-black"
                       : isActive
@@ -44,7 +44,7 @@ export function BookingStepper({
                 </span>
                 <span
                   className={cn(
-                    "text-[11px] font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-500",
+                    "text-xs font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-500",
                     isActive
                       ? "text-text-primary"
                       : isCompleted
@@ -75,10 +75,10 @@ export function BookingStepper({
       {/* Mobile */}
       <div className="md:hidden">
         <div className="flex items-center justify-between mb-3">
-          <p className="text-[13px] font-semibold tracking-tight text-text-primary">
+          <p className="text-sm font-semibold tracking-tight text-text-primary">
             {displaySteps.find((s) => s.key === currentStep)?.label}
           </p>
-          <p className="text-[11px] text-text-muted/60 tabular-nums">
+          <p className="text-xs text-text-muted/60 tabular-nums">
             {completedIndex + 1} / {displaySteps.length}
           </p>
         </div>

@@ -59,7 +59,7 @@ export function StepReview({
         <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Review Your Booking
         </h2>
-        <p className="mt-2 text-[15px] text-text-secondary/80">
+        <p className="mt-2 text-base text-text-secondary/80">
           Please confirm all details before submitting.
         </p>
       </div>
@@ -128,14 +128,14 @@ export function StepReview({
           )}
           {formData.sessionFiles && formData.sessionFiles.length > 0 && (
             <div className="pt-1">
-              <span className="text-[11px] font-semibold tracking-wide uppercase text-neutral-400 block mb-2">
+              <span className="text-xs font-semibold tracking-wide uppercase text-neutral-400 block mb-2">
                 Session Files
               </span>
               <div className="space-y-1">
                 {formData.sessionFiles.map((file, i) => (
                   <div
                     key={`${file.name}-${i}`}
-                    className="flex items-center gap-2 text-[13px] text-neutral-600"
+                    className="flex items-center gap-2 text-sm text-neutral-600"
                   >
                     <Music className="w-3 h-3 text-neutral-300 shrink-0" />
                     <span className="truncate">{file.name}</span>
@@ -151,20 +151,20 @@ export function StepReview({
         {/* Pricing */}
         <div className="p-6 bg-neutral-50">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[13px] text-neutral-500">Session Total</span>
-            <span className="text-lg font-bold text-black tabular-nums">
+            <span className="text-sm text-neutral-500">Session Total</span>
+            <span className="text-xl font-bold text-black tabular-nums">
               {formatCurrency(service.priceMinorUnits)}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-neutral-400">
+            <span className="text-sm text-neutral-400">
               Deposit Required
             </span>
-            <span className="text-[13px] text-neutral-500 tabular-nums">
+            <span className="text-sm text-neutral-500 tabular-nums">
               {formatCurrency(service.depositMinorUnits)}
             </span>
           </div>
-          <p className="mt-4 text-[10px] text-neutral-300 leading-relaxed">
+          <p className="mt-4 text-xs text-neutral-300 leading-relaxed">
             Payment integration deferred — no charge will be processed. In
             production, deposits are collected via Stripe before confirmation.
           </p>
@@ -173,7 +173,7 @@ export function StepReview({
 
       {/* Policy note */}
       <div className="mt-4 p-4 rounded-xl bg-white/90 border border-white/60">
-        <p className="text-[11px] text-neutral-400 leading-relaxed">
+        <p className="text-xs text-neutral-400 leading-relaxed">
           <span className="font-semibold text-neutral-500">
             Cancellation &amp; Rescheduling —{" "}
           </span>
@@ -214,7 +214,7 @@ function ReviewSection({
 }) {
   return (
     <div className="p-6">
-      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-4">
+      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-4">
         {title}
       </p>
       <div className="space-y-3">{children}</div>
@@ -225,8 +225,8 @@ function ReviewSection({
 function ReviewRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between gap-6">
-      <span className="text-[13px] text-neutral-400 shrink-0">{label}</span>
-      <span className="text-[13px] text-black text-right font-medium">
+      <span className="text-sm text-neutral-400 shrink-0">{label}</span>
+      <span className="text-sm text-black text-right font-medium">
         {value}
       </span>
     </div>

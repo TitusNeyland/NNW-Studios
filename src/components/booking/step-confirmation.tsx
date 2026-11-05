@@ -46,7 +46,7 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Booking Submitted
         </h2>
-        <p className="mt-3 text-[15px] text-text-secondary/70 max-w-md mx-auto">
+        <p className="mt-3 text-base text-text-secondary/70 max-w-md mx-auto">
           Your session request has been received. You&rsquo;ll get a
           confirmation once reviewed.
         </p>
@@ -59,10 +59,10 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="mt-6 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white shadow-md shadow-white/5"
       >
-        <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-neutral-400">
+        <span className="text-xs font-semibold tracking-[0.15em] uppercase text-neutral-400">
           Ref
         </span>
-        <span className="text-[15px] font-bold text-black tracking-widest font-mono">
+        <span className="text-base font-bold text-black tracking-widest font-mono">
           {confirmation.referenceId}
         </span>
         <button
@@ -80,7 +80,7 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         transition={{ delay: 0.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="mt-3"
       >
-        <span className="inline-flex items-center px-3 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase text-neutral-500 bg-neutral-100 rounded-full">
+        <span className="inline-flex items-center px-3 py-1.5 text-xs font-semibold tracking-[0.15em] uppercase text-neutral-500 bg-neutral-100 rounded-full">
           {confirmation.status === "pending"
             ? "Pending Review"
             : confirmation.status}
@@ -115,20 +115,20 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
           <div className="h-px bg-neutral-100 my-1" />
 
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-neutral-400">Service</span>
-            <span className="text-[13px] font-medium text-black">
+            <span className="text-sm text-neutral-400">Service</span>
+            <span className="text-sm font-medium text-black">
               {confirmation.service}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-neutral-400">Total</span>
-            <span className="text-[15px] font-bold text-black tabular-nums">
+            <span className="text-sm text-neutral-400">Total</span>
+            <span className="text-lg font-bold text-black tabular-nums">
               {confirmation.totalFormatted}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-neutral-300">Deposit</span>
-            <span className="text-[13px] text-neutral-500 tabular-nums">
+            <span className="text-sm text-neutral-300">Deposit</span>
+            <span className="text-sm text-neutral-500 tabular-nums">
               {confirmation.depositFormatted}
             </span>
           </div>
@@ -142,7 +142,7 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
         transition={{ delay: 1.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="mt-4 max-w-md mx-auto text-left p-5 rounded-2xl bg-white/90 border border-white/60"
       >
-        <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-3">
+        <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-3">
           What happens next
         </h3>
         <ul className="space-y-2">
@@ -154,7 +154,7 @@ export function StepConfirmation({ confirmation }: StepConfirmationProps) {
           ].map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2.5 text-[13px] text-neutral-500"
+              className="flex items-start gap-2.5 text-sm text-neutral-500"
             >
               <span className="text-neutral-300 mt-0.5">→</span>
               {item}
@@ -198,10 +198,10 @@ function DetailRow({
     <div className="flex items-start gap-3">
       <Icon className="w-4 h-4 text-neutral-300 shrink-0 mt-0.5" />
       <div>
-        <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-neutral-400">
+        <p className="text-xs font-semibold tracking-[0.15em] uppercase text-neutral-400">
           {label}
         </p>
-        <p className="text-[13px] text-black mt-0.5">{value}</p>
+        <p className="text-sm text-black mt-0.5">{value}</p>
       </div>
     </div>
   );

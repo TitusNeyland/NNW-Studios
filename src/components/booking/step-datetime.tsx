@@ -83,18 +83,18 @@ export function StepDatetime({
         <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Select Date &amp; Time
         </h2>
-        <p className="mt-2 text-[15px] text-text-secondary/80">
+        <p className="mt-2 text-base text-text-secondary/80">
           Find an available slot for your session.
         </p>
-        <div className="mt-3 flex items-center gap-1.5 text-[11px] text-text-muted/40">
-          <Clock className="w-3 h-3" />
+        <div className="mt-3 flex items-center gap-1.5 text-xs text-text-muted/40">
+          <Clock className="w-3.5 h-3.5" />
           All times in {STUDIO_TIMEZONE.replace("_", " ")}
         </div>
       </div>
 
       {/* Date picker */}
       <div>
-        <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-text-muted/40 mb-3">
+        <p className="text-xs font-medium tracking-[0.2em] uppercase text-text-muted/40 mb-3">
           Date
         </p>
         <div className="flex gap-2 overflow-x-auto pb-3 -mx-1 px-1 scrollbar-none">
@@ -106,7 +106,7 @@ export function StepDatetime({
                 key={dateStr}
                 onClick={() => onDateChange(dateStr)}
                 className={cn(
-                  "shrink-0 flex flex-col items-center justify-center w-[68px] h-[84px] rounded-xl border transition-all duration-500",
+                  "shrink-0 flex flex-col items-center justify-center w-[76px] h-[92px] rounded-xl border transition-all duration-500",
                   active
                     ? "bg-white border-white shadow-lg shadow-white/10"
                     : "bg-white/90 border-white/60 hover:bg-white hover:shadow-md hover:shadow-white/5"
@@ -115,7 +115,7 @@ export function StepDatetime({
               >
                 <span
                   className={cn(
-                    "text-[10px] font-medium tracking-widest uppercase transition-colors duration-500",
+                    "text-xs font-medium tracking-widest uppercase transition-colors duration-500",
                     active ? "text-neutral-500" : "text-neutral-400"
                   )}
                 >
@@ -123,7 +123,7 @@ export function StepDatetime({
                 </span>
                 <span
                   className={cn(
-                    "text-xl font-semibold leading-tight mt-0.5 transition-colors duration-500",
+                    "text-2xl font-semibold leading-tight mt-0.5 transition-colors duration-500",
                     active ? "text-black" : "text-neutral-600"
                   )}
                 >
@@ -131,7 +131,7 @@ export function StepDatetime({
                 </span>
                 <span
                   className={cn(
-                    "text-[10px] uppercase transition-colors duration-500",
+                    "text-xs uppercase transition-colors duration-500",
                     active ? "text-neutral-400" : "text-neutral-400"
                   )}
                 >
@@ -147,10 +147,10 @@ export function StepDatetime({
       {selectedDate && (
         <div className="mt-8">
           <div className="flex items-baseline justify-between mb-4">
-            <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-text-muted/40">
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-text-muted/40">
               Available Times
             </p>
-            <p className="text-[11px] text-text-muted/30">
+            <p className="text-xs text-text-muted/30">
               {formatDateFull(selectedDate)}
             </p>
           </div>
@@ -158,7 +158,7 @@ export function StepDatetime({
           {slots.length === 0 ? (
             <div className="p-10 rounded-xl bg-white/90 border border-white/60 text-center">
               <AlertCircle className="w-5 h-5 text-neutral-300 mx-auto mb-3" />
-              <p className="text-[13px] text-neutral-500">
+              <p className="text-sm text-neutral-500">
                 No availability on this date.
               </p>
             </div>
@@ -186,7 +186,7 @@ export function StepDatetime({
                   >
                     <span
                       className={cn(
-                        "text-[13px] font-medium tabular-nums",
+                        "text-sm font-medium tabular-nums",
                         isSelected
                           ? "text-black"
                           : slot.available
